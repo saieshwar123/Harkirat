@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="text" id="title" placeholder="title">
+    <br><br>
+    <input type="text" id="description" placeholder="description">
+    <br><br>
+
+    <div id="todos">
+
+
+
+    </div>
+    <script>
+
+        let gid=0;
+
+        function markAsDone(todoid)
+        {
+            const parent=document.getElementById(todoid);
+            parent.children[2].innerHTML="Done";
+        }
+
+        function createchild(title,description,id)
+        {
+            const child=document.createElement("div");
+            const firstgrandparent=document.createElement("div");
+            firstgrandparent.innerHTML=title;
+            const secondgrandparent=document.createElement("div");
+            secondgrandparent.innerHTML=description;
+            const thirdgrandparent=document.createElement("button");
+            thirdgrandparent.innerHTML="Mark as Done";
+            thirdgrandparent.setAttribute("onclick","markAsDone"+"("+id+")");
+            child.appendChild(firstgrandparent)
+            child.appendChild(secondgrandparent);
+            child.appendChild(thirdgrandparent);
+            child.setAttribute("id",id);
+            return child;
+        }
+        function Alltodos(state)
+        {
+            const title=document.getElementById("title").value;
+            const description=document.getElementById("description").value;
+            const parent=document.getElementById("todos");
+            parent.innerHTML="";
+            for(let i=0;i<state.length;i++)
+            {
+                parent.appendChild(createchild(state[i].title,state[i].description,state[i].id));
+
+            }
+
+        }
+
+        Alltodos([{
+            title:"got ot gym",
+            description:"going",
+            id:1
+        }])
+    </script>
+</body>
+</html>

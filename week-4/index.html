@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input oninput="debounce()" id="p" type="text" placeholder="Enter p number">
+    <input oninput="debounce()" id="t" type="text" placeholder="Enter t number">
+    <input oninput="debounce()" id="r" type="text" placeholder="Enter r number">
+    
+    <p id="show"></p>
+    <script>
+        let timeout
+        function debounce()
+        {
+            clearTimeout(timeout)
+            timeout=setTimeout(function(){
+                myfun();
+            },1000)
+
+        }
+        function myfun()
+        {
+        const p=document.getElementById("p").value;
+        const t=document.getElementById("t").value;
+        const r=document.getElementById("r").value;
+        
+        fetch(`http://localhost:3000/interest?p=${p}&&t=${t}&&r=${r}`).then(function(response){
+            response.text().then(function(data){
+            document.getElementById("show").innerHTML=data;
+            })
+        })
+        }
+
+    </script>
+</body>
+</html>
